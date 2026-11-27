@@ -1,0 +1,37 @@
+# Bank Marketing Campaign Performance & Customer Subscription Analysis
+
+## 1. Business Problem
+
+Banks conduct marketing campaigns to encourage customers to subscribe to financial products such as term deposits. However, not all customers contacted through these campaigns choose to subscribe.
+
+A bank wants to understand the factors influencing customer subscription decisions, identify customer segments that respond more positively to marketing campaigns, and evaluate how campaign contact frequency and previous campaign outcomes relate to customer responses.
+
+The objective is to analyse historical marketing campaign data and generate actionable, data-driven recommendations that can help improve campaign effectiveness and enable more informed customer-targeting decisions.
+
+## 2. Project Objectives
+
+- Analyse overall campaign response and subscription patterns.
+- Identify customer segments with higher subscription rates.
+- Examine the relationship between campaign contact frequency and subscription outcomes.
+- Evaluate how previous campaign interactions relate to current subscription decisions.
+- Compare customer responses across relevant demographic and campaign-related categories.
+- Develop business recommendations to improve future marketing campaign effectiveness.
+
+## 3. Key Business Questions
+
+1. What proportion of contacted customers subscribed to a term deposit?
+2. Which age groups and customer segments show higher subscription rates?
+3. How does the number of contacts during a campaign relate to subscription outcomes?
+4. Do previous successful campaign interactions influence current subscription decisions?
+5. Which campaign-related factors are associated with better customer responses?
+6. What actionable strategies could improve future marketing campaign effectiveness?
+
+## 4. Expected Outcome
+
+A structured business analysis supported by Excel and Power BI, including data cleaning, exploratory analysis, business KPIs, visualisations, key insights and actionable recommendations.
+
+The final deliverables will demonstrate how data analysis can support customer segmentation, campaign evaluation and data-driven marketing decisions.
+
+## 5. Dataset Context
+
+The analysis uses the publicly available UCI Bank Marketing dataset, which contains historical telephone marketing campaign data from a Portuguese banking institution. The findings will be interpreted within the context and limitations of this dataset.

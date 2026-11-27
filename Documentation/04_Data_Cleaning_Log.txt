@@ -1,0 +1,240 @@
+# Data Cleaning Log
+
+## 1. Initial Dataset Inspection
+
+- Dataset: bank-full.csv
+- Total records: 45,211
+- Total columns: 17
+- File format: CSV
+
+## 2. Duplicate Records Check
+
+- Tool used: Microsoft Excel
+- Method: Remove Duplicates
+- Columns checked: All 17 columns
+- Result: No duplicate records found.
+- Action taken: No records were removed.
+
+
+## 3. Missing Values Check
+
+- Tool used: Microsoft Excel
+- Method: Go To Special → Blanks
+- Range checked: Entire dataset (all 17 columns)
+- Result: No blank cells found.
+- Action taken: No missing-value replacements or deletions required at this stage.
+
+
+## 4. Unknown Values Investigation
+
+The following categorical columns were investigated using Excel filters.
+
+| Column | Unknown Records |
+|---|---:|
+| job | 288 |
+| education | 1,857 |
+| contact | 13,020 |
+| poutcome | 36,959 |
+
+### Observations
+
+- The job column contains a relatively small number of unknown entries.
+- Education contains a moderate number of unknown entries.
+- Contact contains a substantial proportion of unknown entries.
+- Poutcome contains a high proportion of unknown entries, potentially indicating customers without recorded previous campaign outcomes.
+
+### Cleaning Decision
+
+No unknown values have been replaced or deleted at this stage. Their meaning and analytical impact will be evaluated before deciding on any treatment.
+
+
+## 5. Special Value Investigation — pdays
+
+- Column investigated: pdays
+- Special value: -1
+- Records with pdays = -1: 36,954
+- Percentage of dataset: 81.74%
+
+### Interpretation
+
+According to the original dataset documentation, -1 indicates that the customer was not previously contacted during an earlier marketing campaign.
+
+### Cleaning Decision
+
+The -1 values are valid indicators and will be retained. They will not be treated as missing values or replaced with zero.
+
+
+## 6. Numerical Data Inspection
+
+The following numerical variables were examined using Excel MIN, MAX and AVERAGE functions.
+
+| Variable | Minimum | Maximum | Average |
+|---|---:|---:|---:|
+| Age | 18 | 95 | 40.936 |
+| Balance | -8019 | 102127 | 1362.272 |
+| Duration | 0 | 4918 | 258.163 |
+| Campaign | 1 | 63 | 2.764 |
+| Previous | 0 | 275 | 0.580 |
+| Pdays | -1 | 871 | 40.198 |
+
+### Initial Observations
+
+- Balance contains both negative and extremely high values.
+- Campaign and previous contain unusually high maximum values.
+- Duration includes zero-second calls and very long calls.
+- Pdays contains -1, which is a valid indicator for customers who were not previously contacted.
+
+### Cleaning Decision
+
+No numerical records have been removed or modified. Potential outliers will be investigated further before any cleaning decisions are made.
+
+
+## 7. Outlier Detection — Balance
+
+Method used: Interquartile Range (IQR)
+
+| Measure | Value |
+|---|---:|
+| Q1 | 72 |
+| Q3 | 1,428 |
+| IQR | 1,356 |
+| Lower Bound | -1,962 |
+| Upper Bound | 3,462 |
+| Lower Outliers | 17 |
+| Upper Outliers | 4,712 |
+| Total Potential Outliers | 4,729 |
+
+### Interpretation
+
+A total of 4,729 records (approximately 10.46% of the dataset) were flagged as potential balance outliers using the 1.5 × IQR rule.
+
+Most flagged observations were above the upper boundary.
+
+### Cleaning Decision
+
+All flagged records are retained because extreme account balances may represent legitimate customer financial information. No values were deleted or modified.
+
+
+## 8. Outlier Detection — Age
+
+Method used: Interquartile Range (IQR)
+
+| Measure | Value |
+|---|---:|
+| Q1 | 33 |
+| Q3 | 48 |
+| IQR | 15 |
+| Lower Bound | 10.5 |
+| Upper Bound | 70.5 |
+| Lower Outliers | 0 |
+| Upper Outliers | 487 |
+| Total Potential Outliers | 487 |
+
+### Interpretation
+
+A total of 487 records (approximately 1.08% of the dataset) were flagged as potential age outliers. All flagged observations were above the upper IQR boundary.
+
+### Cleaning Decision
+
+The records have been retained because older customers are valid members of a bank's customer base. No age values were deleted or modified.
+
+
+## 9. Outlier Detection — Duration
+
+**Method used:** Interquartile Range (IQR)
+
+| Measure | Value |
+|---|---:|
+| Q1 | 103 |
+| Q3 | 319 |
+| IQR | 216 |
+| Lower Bound | -221 |
+| Upper Bound | 643 |
+| Lower Outliers | 0 |
+| Upper Outliers | 3,235 |
+| Total Potential Outliers | 3,235 |
+
+### Interpretation
+
+A total of 3,235 records (approximately 7.16% of the dataset) were flagged as potential duration outliers. All flagged observations were above the upper IQR boundary of 643 seconds.
+
+### Cleaning Decision
+
+All records were retained. Longer call durations may represent genuine customer interactions and are not necessarily data errors. No duration values were deleted or modified.
+
+
+## 10. Outlier Detection — Campaign
+
+**Method used:** Interquartile Range (IQR)
+
+| Measure | Value |
+|---|---:|
+| Q1 | 1 |
+| Q3 | 3 |
+| IQR | 2 |
+| Lower Bound | -2 |
+| Upper Bound | 6 |
+| Lower Outliers | 0 |
+| Upper Outliers | 3,064 |
+| Total Potential Outliers | 3,064 |
+
+### Interpretation
+
+A total of 3,064 records (approximately 6.78% of the dataset) were flagged as potential campaign outliers. All flagged observations were above the upper IQR boundary of 6 contacts.
+
+### Cleaning Decision
+
+All records were retained because a higher number of customer contacts may represent genuine campaign activity. No campaign values were deleted or modified.
+
+
+
+## 11. Outlier Detection — Previous
+
+**Method used:** Interquartile Range (IQR)
+
+| Measure | Value |
+|---|---:|
+| Q1 | 0 |
+| Q3 | 0 |
+| IQR | 0 |
+| Lower Bound | 0 |
+| Upper Bound | 0 |
+| Lower Outliers | 0 |
+| Upper Outliers | 8,257 |
+| Total Potential Outliers | 8,257 |
+
+### Interpretation
+
+A total of 8,257 records (approximately 18.26% of the dataset) were flagged as potential outliers. The first and third quartiles are both zero, resulting in an IQR of zero. Consequently, all positive values were flagged by the IQR method.
+
+This reflects the highly zero-heavy distribution of the variable rather than necessarily indicating incorrect data.
+
+### Cleaning Decision
+
+All records were retained because positive previous-contact counts represent valid campaign history. No values were deleted or modified.
+
+
+## 12. Outlier Detection — Pdays
+
+**Method used:** Interquartile Range (IQR)
+
+| Measure | Value |
+|---|---:|
+| Q1 | -1 |
+| Q3 | -1 |
+| IQR | 0 |
+| Lower Bound | -1 |
+| Upper Bound | -1 |
+| Lower Outliers | 0 |
+| Upper Outliers | 8,257 |
+| Total Potential Outliers | 8,257 |
+
+### Interpretation
+
+A total of 8,257 records (approximately 18.26% of the dataset) were flagged as potential outliers. Both Q1 and Q3 equal -1, resulting in an IQR of zero.
+
+The value -1 indicates that a customer was not previously contacted. Values greater than -1 represent customers who had previous campaign contact. Consequently, all positive values were flagged by the IQR method.
+
+### Cleaning Decision
+
+All records were retained. The value -1 is a meaningful indicator of no previous contact, while positive values represent valid campaign history. No pdays values were deleted or modified.
